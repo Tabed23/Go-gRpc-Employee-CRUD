@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package EmployeeRpc;
+
+
+option go_package = "/pb";
+
+message Employee {  
+    string id = 1;
+    string firstname = 2;
+    string lastname = 3;
+    string position = 4;
+    float salary =  5;
+}
+
+message EmployeeResponse {
+    string status = 1;
+    Employee created = 2;
+
+}
+message EmployeeRequest {
+    string empid = 1;
+}
+message GetAllEmployes {
+}
+
+message  DeleteEmloyeReponse {
+    string status = 1;
+}
+message UpdateEmployeeRequest {
+    Employee  emp = 1;
+}
+
+
+service EmployeeService {
+    rpc CreateEmployee(Employee)returns (EmployeeResponse){}
+    rpc GetEmploye(EmployeeRequest)returns (Employee){}
+    rpc GetEmployees(GetAllEmployes)returns (stream Employee){}
+    rpc DeleteEmployee (EmployeeRequest) returns (DeleteEmloyeReponse){}
+    rpc UpdateEmployee(UpdateEmployeeRequest)returns (Employee){}
+}
+
